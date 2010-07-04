@@ -43,6 +43,17 @@ import pdb
 
 def main():
     parser = OptionParser(usage=__doc__)
+
+    def version(option, opt, value, parser):
+        sys.stdout.write("%s\n" % __version__)
+        sys.exit(0)
+
+    parser.add_option(
+        "-V",
+        "--version",
+        action="callback",
+        callback=version
+        )
     parser.add_option(
         "-H", 
         "--html",
