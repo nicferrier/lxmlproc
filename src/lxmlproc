@@ -1,0 +1,63 @@
+#!/usr/bin/python
+
+"""
+lxmlproc [options] stylesheet file [file ...]  
+
+Use the specified XSLT stylesheet to transform each file with Python's
+lxml library.
+
+'stylesheet' or 'file' may be '-' for stdout"""
+
+__version__ = "0.1"
+__author__ = "Nic Ferrier <nic@ferrier.me.uk>"
+
+from lxml import etree
+from optparse import OptionParser
+import sys
+
+def getdoc(f, is_html=False):
+    parser = etree.HTMLParser() if is_html else etree.XMLParser() 
+    if f == "-":
+        return etree.parse(sys.stdin, parser)
+    with open(f) as fd:
+        return etree.parse(fd, parser)
+
+import pdb
+
+def main():
+    parser = OptionParser(usage=__doc__)
+    parser.add_option(
+        "-H", 
+        "--html",
+        dest="is_html",
+        action="store_true",
+        default=False,
+        help="use the HTML parser for files"
+        )
+    parser.add_option(
+        "-o", 
+        "--output",
+        dest="outfile",
+        action="store",
+        default="-",
+        help="set the output file to be used"
+        )
+
+    o,a = parser.parse_args(sys.argv[1:])
+    
+    # Get the xslt
+    t = etree.XSLT(getdoc(a[0]))
+    
+    # Now apply to each xml file specified
+    for d in a[1:]:
+        doc = getdoc(d, is_html=o.is_html)
+        if o.outfile == "-":
+            sys.stdout.write(str(t(doc)))
+        else:
+            with open(o.outfile, "w") as fd:
+                fd.write(str(t(doc)))
+
+if __name__ == "__main__":
+    main()
+
+# End
