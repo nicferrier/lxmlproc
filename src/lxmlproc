@@ -71,13 +71,13 @@ def main():
         help="set the output file to be used"
         )
 
-    o,a = parser.parse_args(sys.argv[1:])
-    
+    o,a = parser.parse_args(sys.argv[1:])    
+
     # Get the xslt
     t = etree.XSLT(getdoc(a[0]))
     
     # Now apply to each xml file specified
-    for d in a[1:]:
+    for d in a[1:] or ["-"]:
         doc = getdoc(d, is_html=o.is_html)
         if o.outfile == "-":
             sys.stdout.write(str(t(doc)))
