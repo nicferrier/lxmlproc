@@ -12,7 +12,7 @@ classifiers = [
 
 setup(
     name = "lxmlproc",
-    version = "0.1",
+    version = "0.2",
     description = "lxml version of xsltproc",
     long_description = """An lxml version of the popular libxslt tool, xsltproc.""",
     license = "GNU GPL v3",
