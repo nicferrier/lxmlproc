@@ -23,7 +23,8 @@ lxmlproc [options] stylesheet file [file ...]
 Use the specified XSLT stylesheet to transform each file with Python's
 lxml library.
 
-'stylesheet' or 'file' may be '-' for stdout"""
+'stylesheet' or 'file' may be '-' for stdin
+"""
 
 __version__ = "0.1"
 __author__ = "Nic Ferrier <nic@ferrier.me.uk>"
