@@ -1,4 +1,4 @@
-# lxmlproc - an lxml version of xsltproc
+= lxmlproc - an lxml version of xsltproc =
 
 This is an incomplete, but still useful, python version of the libxslt
 xsltproc program.
